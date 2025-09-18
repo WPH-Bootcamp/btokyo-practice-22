@@ -1,16 +1,6 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,14 +9,26 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        style={{
+          fontFamily: "system-ui, sans-serif",
+          maxWidth: 880,
+          margin: "2rem auto",
+        }}
       >
+        <h1>Next.js Rendering Demo (CSR / SSR / SSG)</h1>
+        <nav style={{ display: "flex", gap: 12, marginBottom: 24 }}>
+          <a href="/">Home (SSG/ISR)</a>
+          <a href="/ssr">SSR</a>
+          <a href="/csr">CSR</a>
+          <a href="/blog/hello-next">Blog: hello-next (SSG)</a>
+          <a href="/blog/edge-cases">Blog: edge-cases (SSG)</a>
+        </nav>
         {children}
       </body>
     </html>
